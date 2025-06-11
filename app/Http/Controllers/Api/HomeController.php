@@ -11,11 +11,39 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return Home::latest()->first();
+        $home = Home::first();
+
+        if (!$home) {
+            return response()->json([
+                'judul' => null,
+                'isi' => null,
+                'foto_home' => null,
+            ]);
+        }
+
+        return response()->json([
+            'judul' => $home->judul,
+            'isi' => $home->isi,
+            'foto_home' => asset('storage/' . $home->foto_home),
+        ]);
     }
 
     public function motivasi()
     {
-        return Motivasi::latest()->first();
+        $motivasi = Home::with('motivasi')->first();
+    
+        if (!$motivasi || !$motivasi->motivasi) {
+            return response()->json([
+                'motivasi' => null,
+                'foto_motivasi' => null,
+            ]);
+        }
+    
+        return response()->json([
+            'motivasi' => $motivasi->motivasi->motivasi,
+            'foto_motivasi' => asset('storage/' . $motivasi->motivasi->foto_motivasi),
+        ]);
     }
+    
+    
 }
