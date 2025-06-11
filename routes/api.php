@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Models\FooterSetting;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\LogoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+Route::get('/logo', [LogoController::class, 'index']);
+Route::get('/motivasi', [HomeController::class,'motivasi']);
+Route::get('/deskripsi', [HomeController::class, 'index']);
