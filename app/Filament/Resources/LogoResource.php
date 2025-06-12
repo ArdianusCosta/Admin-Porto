@@ -20,11 +20,13 @@ class LogoResource extends Resource
 {
     protected static ?string $model = Logo::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-camera';
 
     protected static ?string $label = 'Logo';
 
     protected static ?string $navigationGroup = 'Home';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

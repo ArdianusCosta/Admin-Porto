@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AboutMeController;
 use Illuminate\Http\Request;
 use App\Models\FooterSetting;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/logo', [LogoController::class, 'index']);
 Route::get('/motivasi', [HomeController::class,'motivasi']);
 Route::get('/deskripsi', [HomeController::class, 'index']);
+Route::get('/about-me', [AboutMeController::class, 'index']);
