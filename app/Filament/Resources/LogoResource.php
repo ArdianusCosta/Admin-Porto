@@ -36,11 +36,13 @@ class LogoResource extends Resource
                 ->schema([
                     TextInput::make('logo')
                     ->label('Logo')
-                    ->placeholder('Masukan nama logo...'),
+                    ->placeholder('Masukan nama logo...')
+                    ->required(),
                     TextInput::make('url')
                     ->url()
                     ->label('URL')
-                    ->placeholder('Masukan url...'),
+                    ->placeholder('Masukan url...')
+                    ->required(),
                 ]),
             ]);
     }
@@ -49,8 +51,12 @@ class LogoResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('logo'),
-                TextColumn::make('url'),
+                TextColumn::make('logo')
+                ->label('Logo')
+                ->searchable(),
+                TextColumn::make('url')
+                ->label('URL')
+                ->searchable(),
             ])
             ->filters([
                 //

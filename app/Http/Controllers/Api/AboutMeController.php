@@ -24,7 +24,7 @@ class AboutMeController extends Controller
 
         return response()->json([
                 'judul' => $about->judul,
-                'isi' => $about->isi,
+                'isi' => strip_tags($about->isi),
                 'nama_isi' => $about->nama_isi,
                 'foto_about_me' => asset('storage/' . $about->foto_about_me),
                 'project_selesai' => $about->project_selesai,

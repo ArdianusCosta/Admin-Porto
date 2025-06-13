@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\AboutMeResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\AboutMeResource\RelationManagers;
+use Filament\Forms\Components\RichEditor;
 
 class AboutMeResource extends Resource
 {
@@ -35,7 +36,7 @@ class AboutMeResource extends Resource
                 ->schema([
                     TextInput::make('judul')->required()->placeholder('Masukan judul...')->label('Judul'),
                     TextInput::make('nama_isi')->required()->placeholder('Masukan nama isi untuk yang Berwarna...')->label('Nama yang Berwarna'),
-                    Textarea::make('isi')->required()->placeholder('Masukan isi...')->rows(7)->label('Isi')->columnSpanFull(),
+                    RichEditor::make('isi')->required()->placeholder('Masukan isi...')->label('Isi')->columnSpanFull(),
                     FileUpload::make('foto_about_me')->required()->label('Foto About Me')->disk('public')->directory('about-me')->image()->columnSpanFull(),
                     TextInput::make('project_selesai')->numeric()->required()->placeholder('Ketikan angka project yang Anda selesaikan...')->label('Project Selesai'),
                     TextInput::make('tahun_pengalaman')->numeric()->required()->placeholder('Ketikan angka pengalaman Anda...')->label('Tahun Pengalaman'),
@@ -50,7 +51,7 @@ class AboutMeResource extends Resource
             ->columns([
                 TextColumn::make('judul')->sortable()->searchable()->label('Judul'),
                 TextColumn::make('nama_isi')->sortable()->searchable()->label('Nama yang Berwarna'),
-                TextColumn::make('isi')->sortable()->searchable()->label('Isi')->limit(50)->wrap(),
+                TextColumn::make('isi')->sortable()->searchable()->label('Isi')->limit(50)->wrap()->formatStateUsing(fn($state) => strip_tags($state)),
                 ImageColumn::make('foto_about_me')->label('Foto About Me')->disk('public'),
                 TextColumn::make('project_selesai')->label('Project Selesai')->sortable()->searchable(),
                 TextColumn::make('tahun_pengalaman')->label('Tahun Pengalaman')->sortable()->searchable(),

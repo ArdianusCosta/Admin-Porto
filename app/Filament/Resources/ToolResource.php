@@ -2,26 +2,28 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProjectCostaResource\Pages;
-use App\Filament\Resources\ProjectCostaResource\RelationManagers;
-use App\Models\Project;
+use App\Filament\Resources\ToolResource\Pages;
+use App\Filament\Resources\ToolResource\RelationManagers;
+use App\Filament\Resources\ToolResource\RelationManagers\ToolpakaiRelationManager;
+use App\Models\Tool;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ProjectCostaResource extends Resource
+class ToolResource extends Resource
 {
-    protected static ?string $model = Project::class;
+    protected static ?string $model = Tool::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationGroup = 'Master Data';
 
@@ -31,20 +33,9 @@ class ProjectCostaResource extends Resource
             ->schema([
                 Card::make()
                 ->schema([
-                    FileUpload::make('foto_project')
-                    ->required()
-                    ->label('Foto Project')
-                    ->columnSpanFull(),
-                    TextInput::make('judul')
-                    ->required()
-                    ->label('judul')
-                    ->placeholder('Masukan judul project...'),
-                    Textarea::make('deskripsi_project')
-                    ->required()
-                    ->label('Deskripsi Project')
-                    ->placeholder('Masukan deskripsi project...'),
+                    TextInput::make('judul')->required()->label('Judul')->placeholder('Masukan judul...'),
+                    RichEditor::make('isi')->required()->label('Isi')->placeholder('Masukan isi...'),
                 ])
-                ->columnSpan('2')
             ]);
     }
 
@@ -52,7 +43,8 @@ class ProjectCostaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('judul')->sortable()->searchable()->label('Judul'),
+                TextColumn::make('isi')->sortable()->searchable()->limit(50)->wrap()->formatStateUsing(fn($state) => strip_tags($state)),
             ])
             ->filters([
                 //
@@ -70,16 +62,15 @@ class ProjectCostaResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ToolpakaiRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProjectCostas::route('/'),
-            'create' => Pages\CreateProjectCosta::route('/create'),
-            'edit' => Pages\EditProjectCosta::route('/{record}/edit'),
+            'index' => Pages\ListTools::route('/'),
+            'edit' => Pages\EditTool::route('/{record}/edit'),
         ];
     }
 }

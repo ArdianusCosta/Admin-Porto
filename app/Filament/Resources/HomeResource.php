@@ -2,22 +2,23 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\HomeResource\Pages;
-use App\Filament\Resources\HomeResource\RelationManagers\MotivasiRelationManager;
-use App\Models\Home;
 use Filament\Forms;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\Home;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\HomeResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\HomeResource\RelationManagers\MotivasiRelationManager;
 
 class HomeResource extends Resource
 {
@@ -38,7 +39,7 @@ class HomeResource extends Resource
                 Card::make()
                 ->schema([
                     TextInput::make('judul')->required()->label('Judul Home')->placeholder('Hai, Kenalin Saya Costa...'),
-                    Textarea::make('isi')->required()->label('Isi Home')->placeholder('Masukan isi/deskripsi untuk di halaman home...')->rows(7),
+                    RichEditor::make('isi')->required()->label('Isi Home')->placeholder('Masukan isi/deskripsi untuk di halaman home...'),
                     FileUpload::make('foto_home')->required()->label('Foto to Home')->disk('public')->directory('home')->image(),
                 ])
             ]);
@@ -49,7 +50,7 @@ class HomeResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('judul')->searchable(),
-                TextColumn::make('isi')->searchable()->limit(50)->wrap(),
+                TextColumn::make('isi')->searchable()->limit(50)->wrap()->formatStateUsing(fn($state) => strip_tags($state)),
                 ImageColumn::make('foto_home')->searchable()->disk('public'),
             ])
             ->filters([

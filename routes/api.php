@@ -6,6 +6,7 @@ use App\Models\FooterSetting;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\LogoController;
+use App\Http\Controllers\Api\ToolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,4 @@ Route::get('/logo', [LogoController::class, 'index']);
 Route::get('/motivasi', [HomeController::class,'motivasi']);
 Route::get('/deskripsi', [HomeController::class, 'index']);
 Route::get('/about-me', [AboutMeController::class, 'index']);
+Route::get('/tools', [ToolController::class, 'index']);

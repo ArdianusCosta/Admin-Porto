@@ -23,7 +23,7 @@ class HomeController extends Controller
 
         return response()->json([
             'judul' => $home->judul,
-            'isi' => $home->isi,
+            'isi' => strip_tags($home->isi),
             'foto_home' => asset('storage/' . $home->foto_home),
         ]);
     }
