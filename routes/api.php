@@ -28,3 +28,4 @@ Route::get('/motivasi', [HomeController::class,'motivasi']);
 Route::get('/deskripsi', [HomeController::class, 'index']);
 Route::get('/about-me', [AboutMeController::class, 'index']);
 Route::get('/tools', [ToolController::class, 'index']);
+Route::get('/tool-pakai', [ToolController::class, 'tool']);

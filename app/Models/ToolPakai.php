@@ -9,7 +9,7 @@ class ToolPakai extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['tool_id','judul_tool','foto_tool','deskripsi_tool'];
+    protected $fillable = ['tool_id','judul_tool','urutan_tools','foto_tool','deskripsi_tool'];
 
     public function tool_id()
     {

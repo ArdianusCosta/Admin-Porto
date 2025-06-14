@@ -27,20 +27,18 @@ class ToolController extends Controller
 
     public function tool()
     {
-        $pakai = ToolPakai::first();
+        $pakai = ToolPakai::all();
 
-        if(!$pakai){
-            return response()->json([
-                'judul_tool' => null,
-                'foto_tool' => null,
-                'deskripsi_tool' => null,
-            ]);
-        }
+        $result = $pakai->map(function($item){
+            return [
+                'id' => $item->id,
+                'judul_tool' => $item->judul_tool,
+                'urutan_tools' => $item->urutan_tools,
+                'foto_tool' => asset('storage/' . $item->foto_tool),
+                'deskripsi_tool' => html_entity_decode(strip_tags($item->deskripsi_tool)),
+            ];
+        });
 
-        return response()->json([
-            'judul_tool' => $pakai->judul_tool,
-            'foto_tool' => asset('storage/' . $pakai->foto_tool),
-            'deskripsi_tool' => strip_tags($pakai->deskripsi_tool),
-        ]);
+        return response()->json($result);
     }
 }

@@ -25,8 +25,15 @@ class ToolpakaiRelationManager extends RelationManager
                     ->required()
                     ->maxLength(255)
                     ->label('Nama Tool')
-                    ->columnSpanFull()
+                    ->columns(2)
                     ->placeholder('Masukan nama Tool...'),
+                Forms\Components\TextInput::make('urutan_tools')
+                    ->required()
+                    ->maxLength(255)
+                    ->label('Urutan Tool')
+                    ->columns(2)
+                    ->placeholder('Ketikan urutan Tool...')
+                    ->numeric(),
                 RichEditor::make('deskripsi_tool')->required()->placeholder('Masukan deskripsi Tool...')->label('Deskripsi Tool')->columnSpanFull(),
                 FileUpload::make('foto_tool')->required()->placeholder('Pilih foto tool...')->label('Foto Tool')->disk('public')->directory('tool')->image()->columnSpanFull(),
             ]);
@@ -38,6 +45,7 @@ class ToolpakaiRelationManager extends RelationManager
             ->recordTitleAttribute('judul_tool')
             ->columns([
                 Tables\Columns\TextColumn::make('judul_tool')->label('Nama Tool')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('urutan_tools')->label('Urutan Tool')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('deskripsi_tool')->label('Deskripsi Tool')->sortable()->searchable()->limit(50)->wrap()->formatStateUsing(fn($state) => strip_tags($state)),
                 Tables\Columns\ImageColumn::make('foto_tool')->label('Foto Tool')->sortable()->searchable()->disk('public'),
             ])

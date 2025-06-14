@@ -2,14 +2,12 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ToolResource\Pages;
-use App\Filament\Resources\ToolResource\RelationManagers;
-use App\Filament\Resources\ToolResource\RelationManagers\ToolpakaiRelationManager;
-use App\Models\Tool;
+use App\Filament\Resources\BahasaProgramResource\Pages;
+use App\Filament\Resources\BahasaProgramResource\RelationManagers;
+use App\Models\BahasaProgram;
+use App\Models\Bprogram;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -19,13 +17,15 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ToolResource extends Resource
+class BahasaProgramResource extends Resource
 {
-    protected static ?string $model = Tool::class;
+    protected static ?string $model = Bprogram::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationGroup = 'Master Data';
+
+    protected static ?string $label = 'Bahasa Program';
 
     public static function form(Form $form): Form
     {
@@ -33,8 +33,7 @@ class ToolResource extends Resource
             ->schema([
                 Card::make()
                 ->schema([
-                    TextInput::make('judul')->required()->label('Judul')->placeholder('Masukan judul...'),
-                    RichEditor::make('isi')->required()->label('Isi')->placeholder('Masukan isi...'),
+                    TextInput::make('bahasa_pemrograman')->required()->label('Bahasa Program')->placeholder('Masukan bahasa program anda...'),
                 ])
             ]);
     }
@@ -43,18 +42,18 @@ class ToolResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('judul')->sortable()->searchable()->label('Judul'),
-                TextColumn::make('isi')->sortable()->searchable()->limit(50)->wrap()->formatStateUsing(fn($state) => strip_tags($state)),
+                TextColumn::make('bahasa_pemrograman')->searchable()->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    //
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -62,15 +61,16 @@ class ToolResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ToolpakaiRelationManager::class,
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTools::route('/'),
-            'edit' => Pages\EditTool::route('/{record}/edit'),
+            'index' => Pages\ListBahasaPrograms::route('/'),
+            'create' => Pages\CreateBahasaProgram::route('/create'),
+            'edit' => Pages\EditBahasaProgram::route('/{record}/edit'),
         ];
     }
 }
