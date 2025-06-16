@@ -57,6 +57,7 @@ class CostaajaPanelProvider extends PanelProvider
                 'Dashboard',
                 'Home',
                 'About Me',
+                'Project',
                 'Master Data',
             ]);
     }

@@ -24,7 +24,9 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
+
+    protected static ?string $navigationGroup = 'Project';
 
     public static function form(Form $form): Form
     {
@@ -58,7 +60,7 @@ class ProjectResource extends Resource
                 TextColumn::make('isi_project')->sortable()->searchable()->label('Isi')->limit(50)->wrap()->formatStateUsing(fn($state) => strip_tags($state)),
                 TextColumn::make('url_project')->searchable()->sortable(),
                 TextColumn::make('urutan_project')->searchable()->sortable(),
-            ])
+            ])  
             ->filters([
                 //
             ])

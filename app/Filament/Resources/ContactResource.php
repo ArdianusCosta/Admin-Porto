@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ContactResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ContactResource\RelationManagers;
+use Filament\Forms\Components\Placeholder;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -26,27 +27,22 @@ class ContactResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-code-bracket-square';
 
+    protected static ?string $label = 'Footer';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Card::make()
                 ->schema([
-                    TextInput::make('nama')
-                    ->required()
-                    ->label('Nama Contact')
-                    ->placeholder('Contoh Instagram'), 
-                    FileUpload::make('icon')
+                    TextInput::make('icon')
                         ->required()
                         ->label('Icon')
-                        ->disk('public')
-                        ->directory('icon'),
+                        ->placeholder('contoh...ri-instagram-fill ri-2x...'),
                     TextInput::make('url')
                         ->label('Link Kontak')
                         ->placeholder('https://instagram.com/akunmu')
-                        ->url()
-                        ->required()
-                        ->rules(['url']), 
+                        ->required(),
                     Toggle::make('status')
                         ->label('Tampilkan?')
                         ->inline(false)
@@ -61,11 +57,7 @@ class ContactResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('nama')
-                    ->label('Nama')
-                    ->sortable()
-                    ->searchable(),
-                ImageColumn::make('icon')
+                TextColumn::make('icon')
                     ->label('Icon'),
                 TextColumn::make('url')
                     ->label('URL'),

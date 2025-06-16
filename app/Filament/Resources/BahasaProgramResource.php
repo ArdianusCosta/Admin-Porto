@@ -21,7 +21,7 @@ class BahasaProgramResource extends Resource
 {
     protected static ?string $model = Bprogram::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-language';
 
     protected static ?string $navigationGroup = 'Master Data';
 
@@ -44,6 +44,7 @@ class BahasaProgramResource extends Resource
             ->columns([
                 TextColumn::make('bahasa_pemrograman')->searchable()->sortable(),
             ])
+            ->defaultSort('bahasa_pemrograman', 'asc')
             ->filters([
                 //
             ])
