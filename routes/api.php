@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AboutMeController;
+use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\FooterController;
 use Illuminate\Http\Request;
 use App\Models\FooterSetting;
@@ -33,3 +34,4 @@ Route::get('/tools', [ToolController::class, 'index']);
 Route::get('/tool-pakai', [ToolController::class, 'tool']);
 Route::get('/project', [ProjectController::class,'index']);
 Route::get('/footer',[FooterController::class, 'index']);
+Route::post('/contact', [ContactController::class, 'store']);

@@ -9,5 +9,5 @@ class ContactPesan extends Model
 {
     use HasFactory;
 
-    protected $guarded =[];
+    protected $fillable =['nama','email','judul','pesan'];
 }
