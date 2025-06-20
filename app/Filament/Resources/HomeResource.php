@@ -26,11 +26,20 @@ class HomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    protected static ?string $label = 'Deskripsi';
+    public static function getNavigationLabel(): string
+    {
+        return 'Deskripsi';
+    }
 
-    protected static ?string $navigationGroup = 'Home';
-
-    protected static ?int $navigationSort = 2;
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Home';
+    }
+    
+    public static function getNavigationSort(): ?int
+    {
+        return 1;
+    }    
 
     public static function form(Form $form): Form
     {

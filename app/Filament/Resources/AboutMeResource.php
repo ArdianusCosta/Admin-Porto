@@ -26,7 +26,20 @@ class AboutMeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-information-circle';
 
-    protected static ?string $navigationGroup = 'About Me';
+    public static function getNavigationLabel(): string
+    {
+        return 'About Me';
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return null;
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 10;
+    }
 
     public static function form(Form $form): Form
     {

@@ -21,6 +21,11 @@ class ContactPesanResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-ellipsis';
 
+    public static function getNavigationLabel(): string
+    {
+        return 'List Contact';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

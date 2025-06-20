@@ -23,9 +23,20 @@ class BahasaProgramResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-language';
 
-    protected static ?string $navigationGroup = 'Master Data';
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Master Data';
+    }
 
-    protected static ?string $label = 'Bahasa Program';
+    public static function getNavigationSort(): ?int
+    {
+        return 20;
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Bahasa Program';
+    }
 
     public static function form(Form $form): Form
     {

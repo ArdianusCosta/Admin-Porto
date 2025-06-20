@@ -25,7 +25,20 @@ class ToolResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-wrench-screwdriver';
 
-    protected static ?string $navigationGroup = 'Master Data';
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Master Data';
+    }
+    
+    public static function getNavigationSort(): ?int
+    {
+        return 20;
+    }       
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Tools';
+    }
 
     public static function form(Form $form): Form
     {

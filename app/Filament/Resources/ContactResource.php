@@ -27,7 +27,20 @@ class ContactResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-code-bracket-square';
 
-    protected static ?string $label = 'Footer';
+    public static function getNavigationLabel(): string
+    {
+        return 'Footer';
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return null;
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 12;
+    }
 
     public static function form(Form $form): Form
     {

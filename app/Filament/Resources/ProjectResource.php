@@ -26,10 +26,23 @@ class ProjectResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 
-    protected static ?string $navigationGroup = 'Project';
+    public static function getNavigationLabel(): string
+    {
+      return 'Project';
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return null;
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 11;
+    }
 
     public static function form(Form $form): Form
-    {
+    {   
         return $form
             ->schema([
                 Card::make()

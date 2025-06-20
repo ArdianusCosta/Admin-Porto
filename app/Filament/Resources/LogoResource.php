@@ -22,11 +22,20 @@ class LogoResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-camera';
 
-    protected static ?string $label = 'Logo';
+   public static function getNavigationLabel(): string
+   {
+        return 'Logo';
+   }
 
-    protected static ?string $navigationGroup = 'Home';
+   public static function getNavigationGroup(): ?string
+    {
+        return 'Home';
+    }
 
-    protected static ?int $navigationSort = 1;
+    public static function getNavigationSort(): ?int
+    {
+        return 1;
+    }
 
     public static function form(Form $form): Form
     {

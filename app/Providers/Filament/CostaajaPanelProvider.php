@@ -27,6 +27,7 @@ class CostaajaPanelProvider extends PanelProvider
             ->id('costaaja')
             ->path('costaaja')
             ->login()
+            ->brandName('Admin Porto Costa')
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -56,8 +57,6 @@ class CostaajaPanelProvider extends PanelProvider
             ->navigationGroups([
                 'Dashboard',
                 'Home',
-                'About Me',
-                'Project',
                 'Master Data',
             ]);
     }
