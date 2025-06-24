@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\Api\AboutMeController;
-use App\Http\Controllers\Api\ContactController;
-use App\Http\Controllers\Api\FooterController;
 use Illuminate\Http\Request;
-use App\Models\FooterSetting;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\LogoController;
-use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\ToolController;
+use App\Http\Controllers\Api\FooterController;
+use App\Http\Controllers\Api\NavbarController;
+use App\Http\Controllers\Api\AboutMeController;
+use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +35,6 @@ Route::get('/tool-pakai', [ToolController::class, 'tool']);
 Route::get('/project', [ProjectController::class,'index']);
 Route::get('/footer',[FooterController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'store']);
+
+//lang
+Route::get('/navbar', [NavbarController::class, 'index']);
